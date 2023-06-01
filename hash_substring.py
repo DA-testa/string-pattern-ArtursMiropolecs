@@ -19,22 +19,22 @@ def print_occurrences(output):
         print(pos, end=' ')
 
 def get_occurrences(pattern, text):
-    p = 1000000007
+    p = 1000000007 #mainigie pol.hash algoritma.
     x = 263
-    result = []
-    p_hash = poly_hash(pattern, p, x)
-    for i in range(len(text) - len(pattern) + 1):
-        if p_hash != poly_hash(text[i:i+len(pattern)], p, x):
+    result = [] #tuksa skaita
+    p_hash = poly_hash(pattern, p, x) #modela pol.vert
+    for i in range(len(text) - len(pattern) + 1):  # Salīdziniet pašreizējā segmenta jaucējvērtību ar modeļa jaucējvērtību
+        if p_hash != poly_hash(text[i:i+len(pattern)], p, x): # Ja jaucējvērtības sakrīt, salīdziniet faktiskās virknes, lai nodrošinātu atbilstību
             continue
-        if pattern == text[i:i+len(pattern)]:
+        if pattern == text[i:i+len(pattern)]: # Ja virknes sakrīt, rezultātu sarakstam pievienojiet segmenta sākuma pozīciju
             result.append(i)
-    return result
+    return result # Atgriezt pozīciju sarakstu
 
 def poly_hash(s, p, x):
-    hash_value = 0
-    for i in reversed(range(len(s))):
-        hash_value = (hash_value * x + ord(s[i])) % p
-    return hash_value
+    hash_value = 0 # Inicializējiet jaucējvērtību kā nulli
+    for i in reversed(range(len(s))): # Atkārtojiet virknes rakstzīmes apgrieztā secībā
+        hash_value = (hash_value * x + ord(s[i])) % p # Atjauniniet jaucējvērtību, izmantojot polinoma jaukšanas formulu
+    return hash_value # Atgriezt galīgo
 
 if __name__ == '__main__':
     print_occurrences(get_occurrences(*read_input()))
