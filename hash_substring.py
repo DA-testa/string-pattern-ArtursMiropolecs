@@ -24,8 +24,8 @@ def get_occurrences(pattern, text):
     result = [] #tuksa skaita
     p_hash = poly_hash(pattern, p, x) #modela pol.vert
     for i in range(len(text) - len(pattern) + 1):  # Salīdziniet pašreizējā segmenta jaucējvērtību ar modeļa jaucējvērtību
-        if p_hash != poly_hash(text[i:i+len(pattern)], p, x): # Ja jaucējvērtības sakrīt, salīdziniet faktiskās virknes, lai nodrošinātu atbilstību
-            continue
+        if p_hash != poly_hash(text[i:i+len(pattern)], p, x): # Ja jaucējvērtības nav vienādas, pārejiet uz nākamo segmentu
+            continue # Ja jaucējvērtības sakrīt, salīdziniet faktiskās virknes, lai nodrošinātu atbilstību
         if pattern == text[i:i+len(pattern)]: # Ja virknes sakrīt, rezultātu sarakstam pievienojiet segmenta sākuma pozīciju
             result.append(i)
     return result # Atgriezt pozīciju sarakstu
